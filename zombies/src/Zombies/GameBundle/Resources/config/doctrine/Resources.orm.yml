@@ -1,0 +1,20 @@
+Zombies\GameBundle\Entity\Resources:
+    type: entity
+    table: null
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        water:
+            type: integer
+        food:
+            type: integer
+        weapons:
+            type: integer
+        placeId:
+            type: integer
+            column: place_id
+    lifecycleCallbacks: {  }

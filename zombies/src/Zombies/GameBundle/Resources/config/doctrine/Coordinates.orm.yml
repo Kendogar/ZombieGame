@@ -1,0 +1,20 @@
+Zombies\GameBundle\Entity\Coordinates:
+    type: entity
+    table: null
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        xCoordinate:
+            type: float
+            column: x_coordinate
+        yCoordinate:
+            type: float
+            column: y_coordinate
+        placeId:
+            type: integer
+            column: place_id
+    lifecycleCallbacks: {  }

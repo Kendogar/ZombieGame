@@ -1,0 +1,17 @@
+Zombies\GameBundle\Entity\Place:
+    type: entity
+    table: places
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        coordinates:
+            type: array
+        inhabitants:
+            type: object
+        resources:
+            type: object
+    lifecycleCallbacks: {  }

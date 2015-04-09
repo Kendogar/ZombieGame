@@ -1,0 +1,20 @@
+Zombies\GameBundle\Entity\Inhabitants:
+    type: entity
+    table: null
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        males:
+            type: integer
+        females:
+            type: integer
+        children:
+            type: integer
+        placeId:
+            type: integer
+            column: place_id
+    lifecycleCallbacks: {  }

@@ -1,0 +1,27 @@
+zombies_game:
+    resource: "@ZombiesGameBundle/Resources/config/routing.yml"
+    prefix:   /
+
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation
+
+home:
+    path: /
+    defaults: { _controller: ZombiesGameBundle:Default:index }
+
+create_location:
+    path: /create/{coordinates}
+    defaults: { _controller: ZombiesGameBundle:Default:create }
+
+show_location:
+    path: /show/{id}
+    defaults: { _controller: ZombiesGameBundle:Default:show }
+
+update_location:
+    path: /update/{id}
+    defaults: { _controller: ZombiesGameBundle:Default:update }
+
+delete_location:
+    path: /delete/{id}
+    defaults: { _controller: ZombiesGameBundle:Default:delete }
