@@ -41,8 +41,15 @@ $(document).ready(function() {
 
         // When a polygon is drawn:
         google.maps.event.addListener(drawingManager, "overlaycomplete", function (event) {
-            $url = "http://127.0.0.1:8000/create/"+event.overlay.getPath().getArray();
-            $.get($url);
+            var type = prompt("Is it a house, shop, mall or zombielair?", "house");
+            if (type.toLowerCase() == "house" || type.toLowerCase() == "shop" || type.toLowerCase() == "mall" || type.toLowerCase() == "zombielair") {
+                $url = "/create/"+event.overlay.getPath().getArray()+"/"+type;
+                $.get($url);
+            }
+            else {
+                alert("Wrong type entered. Polygon not saved.");
+            }
+
         });
 
         google.maps.event.addListener(map, "idle", function (event){
@@ -104,7 +111,7 @@ $(document).ready(function() {
 
         });
     }
-
+    var placeId;
     function doSomething(contentCoord){
         $.ajax({
             type:"POST",
@@ -112,17 +119,25 @@ $(document).ready(function() {
             data:{ contentCoordinateArray : contentCoord },
             dataType: 'json',
             success: function (data){
-                $("#status").html("<div id='houseContent'><div id='inhabitants'>" +
-                "<h3>Inhabitants</h3><br>" +
-                "<b>Males: </b>" + data[0].males + "<br>"  +
+                placeId = data[0].place_id;
+                $("#status").html("<div id='houseContent'><div id='buttons'><input type='button' name='Delete' value='Delete'></div>" +
+                "<div id='inhabitants'><h3>Inhabitants</h3><br>" +
+                "<p><b>Males: </b>" + data[0].males + "<br>"  +
                 "<b>Females: </b>" + data[0].females + "<br>"  +
-                "<b>Children: </b>" + data[0].children + "<br></div>"  +
+                "<b>Children: </b>" + data[0].children + "<br>"  +
+                "<b>Zombies: </b>" + data[0].zombies + "</p><br></div>"  +
                 "<div id='resources'><h3>Resources</h3><br>" +
-                "<b>Water: </b>" + data[0].water + "<br>"  +
+                "<b><p>Water: </b>" + data[0].water + "<br>"  +
                 "<b>Food: </b>" + data[0].food + "<br>"  +
-                "<b>Weapons: </b>" + data[0].weapons + "<br></div></div>")
+                "<b>Weapons: </b>" + data[0].weapons + "</p><br></div></div>");
+
+                $("#buttons").click(function(){
+                    $.get("/delete/" + placeId);
+                    $("#status").html("");
+                })
             }
-        })
+        });
     }
+
     google.maps.event.addDomListener(window, 'load', initialize);
 });

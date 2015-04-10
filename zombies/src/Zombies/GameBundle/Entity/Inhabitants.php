@@ -34,6 +34,11 @@ class Inhabitants
      */
     private $placeId;
 
+    /**
+     * @var integer
+     */
+    private $zombies;
+
 
     /**
      * Get id
@@ -112,6 +117,29 @@ class Inhabitants
     public function getChildren()
     {
         return $this->children;
+    }
+
+    /**
+     * Set zombies
+     *
+     * @param integer $zombies
+     * @return Inhabitants
+     */
+    public function setZombies($zombies)
+    {
+        $this->zombies = $zombies;
+
+        return $this;
+    }
+
+    /**
+     * Get zombies
+     *
+     * @return integer
+     */
+    public function getZombies()
+    {
+        return $this->zombies;
     }
 
     /**

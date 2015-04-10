@@ -4,14 +4,12 @@ namespace Zombies\GameBundle\Utils;
 
 use Zombies\GameBundle\Entity\Place;
 use Zombies\GameBundle\Utils;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Response;
-
 
 class PlaceService{
 
-    public function createPlace(){
+    public function createPlace($type){
         $place = new Place();
+        $place->setType($type);
 
         return $place;
     }

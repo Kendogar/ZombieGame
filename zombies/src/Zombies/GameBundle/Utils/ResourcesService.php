@@ -4,8 +4,6 @@ namespace Zombies\GameBundle\Utils;
 
 use Zombies\GameBundle\Entity\Resources;
 use Zombies\GameBundle\Utils;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Response;
 
 
 class ResourcesService{

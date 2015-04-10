@@ -6,46 +6,23 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Zombies\GameBundle\Utils;
 
-/*use Zombies\GameBundle\Entity\Place;
-use Symfony\Component\Routing\RouteCollection;
-use Symfony\Component\Routing\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;*/
-
 
 class DefaultController extends Controller
 {
 
     public function indexAction()
     {
-        $repository = $this->getDoctrine()->getRepository('ZombiesGameBundle:Place');
-        $allPlaces = $repository->findAll();
-
-
-        $allCoordinates = array();
-        foreach ($allPlaces as $place){
-            $placeCoordinates = $this->get('place.manager')->extractCoordinates($place);
-            array_push($allCoordinates, $placeCoordinates);
-        }
-
-        $jarray = json_encode($allCoordinates);
-        print "<pre>";
-        print_r($jarray);
-        print "</pre>";
-        //  $jarray = str_replace('"', "'", $jarray);
-
-
-
         return $this->render('ZombiesGameBundle:Default:index.html.twig');
     }
 
-    public function createAction($coordinates){
+    public function createAction($coordinates, $type){
 
-        $place = $this->get('place.manager')->createPlace();
+        $place = $this->get('place.manager')->createPlace($type);
         $coordinatesArray = $this->get('coordinates.manager')->createCoordinates($coordinates);
         $place = $this->get('place.manager')->assignCoordinates($place,$coordinatesArray);
         $resources = $this->get('resources.manager')->createResources();
         $place = $this->get('place.manager')->assignResources($place, $resources);
-        $inhabitants = $this->get('inhabitants.manager')->createInhabitants();
+        $inhabitants = $this->get('inhabitants.manager')->createInhabitants($type);
         $place = $this->get('place.manager')->assignInhabitants($place, $inhabitants);
 
         $em = $this->getDoctrine()->getManager();
@@ -103,13 +80,27 @@ class DefaultController extends Controller
 
     public function deleteAction($id){
         $em = $this->getDoctrine()->getManager();
-        $place = $em->getRepository('ZombiesGameBundle:Place')->find($id);
+        $places = $em->getRepository('ZombiesGameBundle:Place')->findById($id);
+        $resources = $em->getRepository('ZombiesGameBundle:Resources')->findByPlace_id($id);
+        $coordinates = $em->getRepository('ZombiesGameBundle:Inhabitants')->findByPlace_id($id);
+        $inhabitants = $em->getRepository('ZombiesGameBundle:Coordinates')->findByPlace_id($id);
 
-        if (!$place) {
-            Return new Response('Place with ID: '.$id.' not found.');
+
+
+        foreach($places as $place){
+            $em->remove($place);
         }
-
-        $em->remove($place);
+        foreach($resources as $resource){
+            $em->remove($resource);
+        }
+        foreach($inhabitants as $inhabitant){
+            $em->remove($inhabitant);
+        }
+        foreach($coordinates as $coordinate){
+            $em->remove($coordinate);
+        }
         $em->flush();
+
+        return new Response('Data with ID: '.$id. "deleted.");
     }
 }

@@ -1,9 +1,6 @@
 <?php
 
-use Zombies\GameBundle\Entity\Place;
 use Zombies\GameBundle\Utils;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Response;
 
 $coordinate = $_REQUEST['contentCoordinateArray'];
 
@@ -22,7 +19,7 @@ $id = $watwat["place_id"];
 
 mysqli_free_result($result_prepare);
 
-$sql="SELECT inhabitants.males, inhabitants.females, inhabitants.children, resources.water, resources.food, resources.weapons FROM inhabitants INNER JOIN resources WHERE inhabitants.place_id = ".strval($id)." AND resources.place_id =".strval($id);
+$sql="SELECT inhabitants.males, inhabitants.females, inhabitants.children, inhabitants.zombies, resources.water, resources.food, resources.weapons, resources.place_id FROM inhabitants INNER JOIN resources WHERE inhabitants.place_id = ".strval($id)." AND resources.place_id =".strval($id);
 $result=mysqli_query($con,$sql);
 
 // Fetch all

@@ -4,17 +4,27 @@ namespace Zombies\GameBundle\Utils;
 
 use Zombies\GameBundle\Entity\Inhabitants;
 use Zombies\GameBundle\Utils;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Response;
 
 
 class InhabitantsService{
 
-    public function createInhabitants(){
+    public function createInhabitants($type){
         $inhabitants = new Inhabitants();
-        $inhabitants->setMales(rand(0,3));
-        $inhabitants->setFemales(rand(0,2));
-        $inhabitants->setChildren(rand(0,2));
+
+        if ($type != "zombielair"){
+            $inhabitants->setMales(rand(0,3));
+            $inhabitants->setFemales(rand(0,2));
+            $inhabitants->setChildren(rand(0,2));
+            $inhabitants->setZombies(0);
+        }
+        else {
+            $inhabitants->setZombies(rand(5, 40));
+            $inhabitants->setMales(0);
+            $inhabitants->setFemales(0);
+            $inhabitants->setChildren(0);
+        }
+
+
 
         return $inhabitants;
     }

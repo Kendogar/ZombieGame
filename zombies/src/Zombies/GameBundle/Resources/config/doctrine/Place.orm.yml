@@ -14,4 +14,6 @@ Zombies\GameBundle\Entity\Place:
             type: object
         resources:
             type: object
+        type:
+            type: string
     lifecycleCallbacks: {  }

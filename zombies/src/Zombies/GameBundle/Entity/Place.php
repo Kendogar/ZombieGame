@@ -30,6 +30,11 @@ class Place
     private $resources;
 
     /**
+     * @var string
+     */
+    private $type;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -106,5 +111,28 @@ class Place
     public function getResources()
     {
         return $this->resources;
+    }
+    /**
+     * Set type
+     *
+     * @param string $type
+     * @return Place
+     */
+
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 }

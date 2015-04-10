@@ -6,12 +6,12 @@ app:
     resource: "@AppBundle/Controller/"
     type:     annotation
 
-home:
+manage_map:
     path: /
     defaults: { _controller: ZombiesGameBundle:Default:index }
 
 create_location:
-    path: /create/{coordinates}
+    path: /create/{coordinates}/{type}
     defaults: { _controller: ZombiesGameBundle:Default:create }
 
 show_location:
