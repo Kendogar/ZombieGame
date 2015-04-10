@@ -134,10 +134,19 @@ $(document).ready(function() {
                 $("#buttons").click(function(){
                     $.get("/delete/" + placeId);
                     $("#status").html("");
-                })
+                });
+
+                $.ajax({
+                    type:"POST",
+                    url:"ajax/getPlaceInformation.php",
+                    data:{ placeId : placeId },
+                    dataType: 'json',
+                    success: function (data){
+                        $("#buttons").after("<div id='type'><h2>"+data[0].type+"</h2></div>")
+                    }
+                });
             }
         });
     }
-
     google.maps.event.addDomListener(window, 'load', initialize);
 });
