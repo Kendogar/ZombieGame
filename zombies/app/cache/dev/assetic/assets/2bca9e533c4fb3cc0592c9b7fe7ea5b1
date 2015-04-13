@@ -1,0 +1,23 @@
+html {
+    height: 100%
+}
+
+body {
+    height: 100%; margin: 0; padding: 0
+}
+
+#googleMap {
+    position:relative;
+    height: 100%;
+    width: 100%;
+}
+
+#status {
+    width: 350px;
+    height: 250px;
+    background-color: grey;
+    opacity: 0.7;
+    bottom: 50%;
+    left: 2%;
+    position: relative;
+}

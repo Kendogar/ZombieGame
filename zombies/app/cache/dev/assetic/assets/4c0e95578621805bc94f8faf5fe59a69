@@ -1,0 +1,48 @@
+html {
+    height: 100%
+}
+
+body {
+    height: 100%; margin: 0; padding: 0
+}
+
+#googleMap {
+    position:relative;
+    height: 100%;
+    width: 100%;
+    bottom: 260px;
+}
+
+#status {
+    pointer-events: none;
+    width: 350px;
+    height: 250px;
+    background-color: grey;
+    opacity: 0.7;
+    z-index: 1000;
+    top: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+}
+
+#status h3 {
+    color: darkorange;
+}
+
+#googleMap > div > div:nth-child(9) {
+    top: 20px!important;
+}
+
+#inhabitants {
+    float: left;
+    margin-top: 50px;
+    margin-left: 25px;
+}
+
+#resources{
+    float: right;
+    margin-top: 50px;
+    margin-right: 25px;
+}
+

@@ -1,0 +1,4 @@
+#googleMap {
+    max-height: auto;
+    max-width: auto;
+}
